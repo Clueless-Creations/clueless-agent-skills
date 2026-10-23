@@ -1,9 +1,11 @@
 ---
 name: closet-import
-description: Use when the person wants to build or fill in their closet from photos, things they mention, order emails, or a data export from another app or social account.
+description: Use when the person wants to build or fill in their closet from photos, things they mention, order emails, or a data export from another app or social account. Uses canonical category groups and reconciles counts after merges.
 ---
 
 # Closet import
+
+Read [AGENTS.md](../../AGENTS.md) method 1 first.
 
 ## Start
 
@@ -12,6 +14,10 @@ Call `start_closet_setup`. It returns what's already in the closet and a short c
 ## Before every add
 
 Call `wardrobe.search` and only send pieces that aren't there yet. Likely duplicates get merged onto the existing item, but searching first keeps things clean.
+
+Use the connector's canonical `category_group` values, not a parallel taxonomy. Read groups from `wardrobe.summary` and from search hits. A common group is `bottoms` (jeans, trousers, pants, chinos, skirts, shorts). The server may also normalize aliases. Still send the canonical group so later counts line up. Do not invent `pants` or `trousers` as a group.
+
+Add `brand` or `size` only if a label shows it or the person says it. Do not invent a body type or fit label.
 
 ## Sources
 
@@ -29,9 +35,12 @@ Call `wardrobe.search` and only send pieces that aren't there yet. Likely duplic
 
 ## After
 
-Call `wardrobe.summary` and tell them what was added by category. `signals.list` shows finished receipt imports and pieces still to confirm.
+Call `wardrobe.summary` and tell them what was added by canonical category. Then reconcile: if they ask "how many bottoms", call `wardrobe.search` for that group. If the list length and the summary count differ, report both and explain the merge or filter. Do not guess a single number.
+
+`signals.list` shows finished receipt imports and pieces still to confirm.
 
 ## Don't
 
 - Don't guess brand or size.
 - Don't add someone else's clothes from a shared household order.
+- Don't invent a category group the closet does not already use.
