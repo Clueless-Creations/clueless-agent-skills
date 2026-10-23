@@ -13,11 +13,13 @@ Install from this public repo with `npx skills add Clueless-Creations/clueless-a
 | Skill | What it does |
 | --- | --- |
 | [AGENTS.md](AGENTS.md) | Methods, checklists, decision rules, and routing for every connected assistant |
-| [clueless-daily](skills/clueless-daily/SKILL.md) | Daily playbook: today's outfit, a week or trip, a weekly review, an outfit card, and logging what they wore |
+| [clueless-daily](skills/clueless-daily/SKILL.md) | Daily playbook: today's outfit, a week or trip, a weekly review, the lookbook, a weekly closet update, and logging what they wore |
 | [compose-outfit](skills/compose-outfit/SKILL.md) | Pick one occasion-true outfit from clothes the person owns, then save it if they like it |
 | [plan-week](skills/plan-week/SKILL.md) | Plan five to seven outfits without repeating pieces too often |
-| [outfit-card](skills/outfit-card/SKILL.md) | Turn an outfit into a simple card to show or share |
+| [lookbook](skills/lookbook/SKILL.md) | Default visual: a flat-lay or ghost-mannequin grid, checked against the real pieces |
+| [outfit-card](skills/outfit-card/SKILL.md) | Simple text card when they ask for text or images are unavailable |
 | [closet-import](skills/closet-import/SKILL.md) | Fill the closet from chat photos, order emails, or a file the person exported |
+| [weekly-closet-update](skills/weekly-closet-update/SKILL.md) | Weekly intake of new pieces; offer once and create the routine only after they say yes |
 
 ## Getting connected
 
@@ -33,7 +35,7 @@ Write: `wardrobe.add_items`, `wardrobe.add_pieces`, `wardrobe.update_item`, `wea
 
 Destructive (only when the person asks): `wardrobe.remove_item`, `connector.revoke`
 
-The daily playbook uses only this shipped list. Dedicated tools for richer day context, outfit feedback, a saved week plan, and a rendered card are **coming**. Skills must not invent those names. A generated tool reference from the connector's tool list is not in this repo.
+The daily playbook uses only this shipped list. Dedicated tools for richer day context, outfit feedback, a saved week plan, a rendered card, and `skills.index` (a connector read of this repo's skill→task map) are **coming**. Skills must not invent those names. A generated tool reference from the connector's tool list is not in this repo. After an outfit is chosen, the default visual is the [lookbook](skills/lookbook/SKILL.md), composed from `wardrobe.get_item` and official brand product images.
 
 ## Ground rules for every skill
 

@@ -1,6 +1,6 @@
 ---
 name: clueless-daily
-description: Use when the person asks what to wear, wants a daily closet routine, plans a week or trip and packing list, asks for a weekly review or outfit card, mentions their closet, or says they wore something. Follows AGENTS.md methods and sibling skills. Uses only tools the connector already lists.
+description: Use when the person asks what to wear, wants a daily closet routine, plans a week or trip and packing list, asks for a weekly review or lookbook, mentions their closet, or says they wore something. Follows AGENTS.md methods and sibling skills. Uses only tools the connector already lists.
 ---
 
 # Daily closet routine
@@ -12,7 +12,7 @@ Dress them from clothes they own by running the AGENTS.md methods with the tools
 ## Rules
 
 - Suggest only pieces they own. Every item id comes from a connector result.
-- Never describe or generate a garment they do not own. Name the owned pieces, or make a card with [outfit-card](../outfit-card/SKILL.md).
+- Never describe or generate a garment they do not own. Name the owned pieces, then show them with [lookbook](../lookbook/SKILL.md). Use [outfit-card](../outfit-card/SKILL.md) only for a text card.
 - Never invent brands or sizes.
 - Do not shop, name stores, or send them to buy anything. Closet gaps are categories, not products.
 - If they named an occasion (office, dinner, rain), pass it. Do not invent calendar details.
@@ -36,20 +36,22 @@ Follow [compose-outfit](../compose-outfit/SKILL.md). Run AGENTS.md methods 2 and
 
 1. If they named an occasion, call `outfits.suggest` with `occasion`. For a plain "what should I wear today", call `today.brief`.
 2. Drop any suggested piece that fails the occasion. Replace it with `wardrobe.search`. Check weather and swap layers the same way.
-3. Show the top outfit and, if you have one, an alternate. Each must be a complete formula (top or dress, bottoms unless dress, shoes, outerwear if the weather needs it). Say why in one line from tool data, such as a piece worn least among the occasion-true options.
+3. Show the top outfit and, if you have one, an alternate. Each must be a complete formula (top or dress, bottoms unless dress, shoes, outerwear if the weather needs it). Say why in one line from tool data, such as a piece worn least among the occasion-true options. The default visual is [lookbook](../lookbook/SKILL.md).
 4. If they want a change, search for an alternative with `wardrobe.search`. Use only ids from the connector.
 5. When they approve, offer to save it with `outfits.save`.
 6. If they say they wore it, log it with `wear.log`.
 
 Once the closet has about 15 or more items, offer once: "Want me to pick an outfit every weekday morning?" Set up a recurring task only if they say yes. If they say no, do not ask again for a while.
 
+Also offer once, after the closet already has pieces: "Want a weekly closet update from new photos and order emails?" Follow [weekly-closet-update](../weekly-closet-update/SKILL.md). Create that routine only if they say yes.
+
 ## Plan a week or a trip
 
 Follow [plan-week](../plan-week/SKILL.md) and AGENTS.md method 9. A saved week-plan tool is **coming**. Build the plan from `wardrobe.summary` and `outfits.suggest`, then save the outfits they approve.
 
-## Outfit card
+## Lookbook (default visual)
 
-Follow [outfit-card](../outfit-card/SKILL.md). A rendered-card tool is **coming**. Draw the card from item names, colors, and the person's own photos or a color swatch. Never use a retailer image. Never present a generated picture as a real photo of their clothes.
+Follow [lookbook](../lookbook/SKILL.md). A rendered-card tool and `skills.index` are **coming**. Compose a flat-lay or ghost-mannequin grid from `wardrobe.get_item` and official brand product images. Run the fidelity check. Label each tile photo or render. Use [outfit-card](../outfit-card/SKILL.md) only when they ask for a text card or you cannot place images.
 
 ## Weekly review
 
@@ -65,6 +67,7 @@ Run AGENTS.md methods 1, 4, 6, and 7.
 
 - "I wore X" with no suggested outfit: find the items with `wardrobe.search`, then call `wear.log`.
 - "I bought X": follow [closet-import](../closet-import/SKILL.md). Search first so you do not add duplicates. Use the canonical `category_group`.
+- Recurring weekly new-in: follow [weekly-closet-update](../weekly-closet-update/SKILL.md). Offer once; create the routine only after they say yes.
 
 ## Don't
 
@@ -77,7 +80,7 @@ Run AGENTS.md methods 1, 4, 6, and 7.
 
 ## Coming
 
-Richer day context, outfit feedback (liked / skipped / why), a saved week plan, and a rendered outfit card are **coming**. Do not invent names for them. Keep using the steps above until the README lists new tools.
+Richer day context, outfit feedback (liked / skipped / why), a saved week plan, a rendered outfit card, and `skills.index` are **coming**. Do not invent names for them. Keep using the steps above until the README lists new tools.
 
 ## Example
 
