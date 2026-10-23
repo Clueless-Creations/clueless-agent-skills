@@ -1,11 +1,11 @@
 ---
 name: outfit-card
-description: Use when the person wants to see an outfit laid out, share it, or keep a picture of it. Draws the card from owned item data in formula order.
+description: Use when the person asks for a simple text card of an outfit, or when images cannot be placed. The default visual is lookbook. Draws the card from owned item data in formula order.
 ---
 
 # Render an outfit card
 
-Read [AGENTS.md](../../AGENTS.md) method 5 first. The connector returns outfit data (item ids, names, category groups, colors). A rendered-card tool is **coming**. Your assistant draws the card from that data.
+Read [AGENTS.md](../../AGENTS.md) method 5 first. The default visual is [lookbook](../lookbook/SKILL.md). Use this file only when they ask for a simple text card or you cannot place images. The connector returns outfit data (item ids, names, category groups, colors). A rendered-card tool is **coming**. Your assistant draws the card from that data.
 
 ## Steps
 

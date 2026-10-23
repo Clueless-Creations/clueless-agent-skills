@@ -21,7 +21,7 @@ Shipped write: `wardrobe.add_items`, `wardrobe.add_pieces`, `wardrobe.update_ite
 
 Shipped destructive (only when the person asks): `wardrobe.remove_item`, `connector.revoke`
 
-**Coming:** richer day context on the connector, outfit feedback (liked / skipped / why), a saved week plan, a rendered outfit card. Until the README lists them, look weather up yourself, build a week from `outfits.suggest`, and draw a card from item data.
+**Coming:** richer day context on the connector, outfit feedback (liked / skipped / why), a saved week plan, a rendered outfit card, and `skills.index`. Until the README lists them, look weather up yourself, build a week from `outfits.suggest`, and compose the lookbook from item data. Do not call `skills.index`.
 
 ## Canonical categories
 
@@ -99,7 +99,7 @@ Assemble a complete, occasion-true set from owned ids, then save only if they sa
 1. If they named an occasion, call `outfits.suggest` with `occasion`. For a plain "what should I wear today", call `today.brief`.
 2. Drop any suggested piece that fails the occasion rule. Replace it with `wardrobe.search`. Do not keep a bad slot to preserve "least worn".
 3. Check weather. Swap in a layer or different shoes from search when rain, heat, or cold requires it.
-4. Show each piece by name. One line of why, from tool data: least worn among the occasion-true options, or the layer the weather needs.
+4. Show each piece by name. One line of why, from tool data: least worn among the occasion-true options, or the layer the weather needs. The default visual is the [lookbook](skills/lookbook/SKILL.md): a flat-lay or ghost-mannequin grid with a fidelity check against each item's photo. A simple text card is [outfit-card](skills/outfit-card/SKILL.md) when they ask for text or images are unavailable.
 5. Least-worn is a tie-breaker among pieces that already fit the occasion and weather. It is not a reason to ignore either.
 6. An outfit needs two or more items, or one dress. When they approve, offer `outfits.save`. If they say they wore it, `wear.log`. Choosing is not a wear.
 
@@ -156,8 +156,10 @@ Follow [plan-week](skills/plan-week/SKILL.md).
 | "What should I wear", daily routine, "I wore this" | [clueless-daily](skills/clueless-daily/SKILL.md) |
 | One outfit, one occasion | [compose-outfit](skills/compose-outfit/SKILL.md) |
 | Week, trip, packing list | [plan-week](skills/plan-week/SKILL.md) |
-| Show or share the look | [outfit-card](skills/outfit-card/SKILL.md) |
+| Show, share, render, or lookbook | [lookbook](skills/lookbook/SKILL.md) |
+| Simple text card | [outfit-card](skills/outfit-card/SKILL.md) |
 | Add from photos, emails, or an export | [closet-import](skills/closet-import/SKILL.md) |
+| Weekly closet update, new pieces this week | [weekly-closet-update](skills/weekly-closet-update/SKILL.md) |
 | How many / what's in my closet / audit | This file, method 1 |
 | What to buy / is this worth it | This file, methods 4 and 8 |
 | What to keep, donate, or tailor | This file, methods 6 and 7 |
